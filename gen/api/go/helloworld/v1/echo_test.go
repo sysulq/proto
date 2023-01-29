@@ -16,7 +16,7 @@ import (
 
 func TestGreeterService_SayHello_0(t *testing.T) {
 	type fields struct {
-		server       GreeterServiceHTTPServer
+		server       GreeterServiceEchoServer
 		createRouter func() *v4.Echo
 	}
 	type args struct {
@@ -128,7 +128,7 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			router := tt.fields.createRouter()
-			RegisterGreeterServiceHTTPServer(router, tt.fields.server)
+			RegisterGreeterServiceEchoServer(router, tt.fields.server)
 
 			res := httptest.NewRecorder()
 			router.ServeHTTP(res, tt.args.createReq())
