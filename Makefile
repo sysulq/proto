@@ -2,9 +2,11 @@
 .PHONY: init
 # install tools
 init:
-	go install github.com/bufbuild/buf/cmd/buf@latest
-	go install github.com/srikrsna/protoc-gen-gotag@latest
-	go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2@latest
+	go install github.com/bufbuild/buf/cmd/buf
+	go install github.com/srikrsna/protoc-gen-gotag
+	go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2
+	go install google.golang.org/protobuf/cmd/protoc-gen-go
+	go install google.golang.org/grpc/cmd/protoc-gen-go-grpc
 	go install ./cmd/protoc-gen-go-echo
 
 # update buf mod
