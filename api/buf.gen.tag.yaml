@@ -2,7 +2,6 @@ version: v1
 
 plugins:
   - name: gotag
-    out: .
+    out: ../gen/api/go
     opt:
       - paths=source_relative
-      - xxx=form+"-" query+"-" json+"-"

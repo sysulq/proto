@@ -14,7 +14,8 @@ update:
 # generate code
 generate:
 	buf generate
-	buf generate --template buf.gen.tag.yaml
+	cd api && buf generate --template buf.gen.tag.yaml
+	cd api && find . -type f -path '*.pb.go'|xargs -r rm
 
 .PHONY: lint
 # lint

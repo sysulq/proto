@@ -8,6 +8,7 @@ option go_package = "github.com/douyu/proto/gen/api/go/helloworld/v1;helloworldv
 package helloworld.v1;
 
 import "google/api/annotations.proto";
+import "tagger/tagger.proto";
 
 // The greeting service definition.
 service GreeterService {
@@ -23,7 +24,7 @@ service GreeterService {
 // The request message containing the user's name.
 message SayHelloRequest {
   // name ...
-  string name = 1;
+  string name = 1 [(tagger.tags) = "form:\"name\""] ;;
 }
 
 // The response message containing the greetings

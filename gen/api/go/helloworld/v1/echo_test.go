@@ -36,17 +36,7 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 				server: new(FooServer),
 				createRouter: func() *v4.Echo {
 					echo := v4.New()
-					echo.HTTPErrorHandler = func(err error, c v4.Context) {
-						c.JSON(http.StatusOK, struct {
-							Error int      `json:"error"`
-							Msg   string   `json:"msg"`
-							Data  struct{} `json:"data"`
-						}{
-							Error: http.StatusInternalServerError,
-							Msg:   err.Error(),
-							Data:  struct{}{},
-						})
-					}
+					echo.HTTPErrorHandler = DefaultErrorHandler
 					echo.JSONSerializer = new(protoJsonSerializer)
 					return echo
 				},
@@ -61,7 +51,7 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 				},
 			},
 			wantErr:    false,
-			wantRes:    "{\"data\":{}}",
+			wantRes:    "{\"data\":{\"name\":\"bob\"}}",
 			wantHeader: http.Header{"Content-Type": []string{"application/json; charset=UTF-8"}},
 		},
 		{
@@ -70,12 +60,7 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 				server: new(FooServer),
 				createRouter: func() *v4.Echo {
 					echo := v4.New()
-					echo.HTTPErrorHandler = func(err error, c v4.Context) {
-						c.JSON(http.StatusOK, map[string]interface{}{
-							"error": http.StatusInternalServerError,
-							"msg":   err.Error(),
-						})
-					}
+					echo.HTTPErrorHandler = DefaultErrorHandler
 					return echo
 				},
 			},
@@ -89,7 +74,7 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 				},
 			},
 			wantErr:    false,
-			wantRes:    "{\"error\":500,\"msg\":\"code=200, message=rpc error: code = DataLoss desc = error foo\"}\n",
+			wantRes:    "{\"error\":500,\"msg\":\"code=200, message=rpc error: code = DataLoss desc = error foo\",\"data\":{}}\n",
 			wantHeader: http.Header{"Content-Type": []string{"application/json; charset=UTF-8"}},
 		},
 		{
@@ -98,12 +83,7 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 				server: new(FooServer),
 				createRouter: func() *v4.Echo {
 					echo := v4.New()
-					echo.HTTPErrorHandler = func(err error, c v4.Context) {
-						c.JSON(http.StatusOK, map[string]interface{}{
-							"error": http.StatusInternalServerError,
-							"msg":   err.Error(),
-						})
-					}
+					echo.HTTPErrorHandler = DefaultErrorHandler
 					return echo
 				},
 			},
@@ -117,7 +97,7 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 				},
 			},
 			wantErr:    false,
-			wantRes:    "{\"error\":500,\"msg\":\"code=200, message=code=400, message=Syntax error: offset=2, error=invalid character 'a' in literal null (expecting 'u'), internal=invalid character 'a' in literal null (expecting 'u')\"}\n",
+			wantRes:    "{\"error\":500,\"msg\":\"code=200, message=code=400, message=Syntax error: offset=2, error=invalid character 'a' in literal null (expecting 'u'), internal=invalid character 'a' in literal null (expecting 'u')\",\"data\":{}}\n",
 			wantHeader: http.Header{"Content-Type": []string{"application/json; charset=UTF-8"}},
 		},
 		{
@@ -126,12 +106,7 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 				server: new(FooServer),
 				createRouter: func() *v4.Echo {
 					echo := v4.New()
-					echo.HTTPErrorHandler = func(err error, c v4.Context) {
-						c.JSON(http.StatusOK, map[string]interface{}{
-							"error": http.StatusInternalServerError,
-							"msg":   err.Error(),
-						})
-					}
+					echo.HTTPErrorHandler = DefaultErrorHandler
 					return echo
 				},
 			},
@@ -145,7 +120,7 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 				},
 			},
 			wantErr:    false,
-			wantRes:    "{\"error\":500,\"msg\":\"code=404, message=Not Found\"}\n",
+			wantRes:    "{\"error\":500,\"msg\":\"code=404, message=Not Found\",\"data\":{}}\n",
 			wantHeader: http.Header{"Content-Type": []string{"application/json; charset=UTF-8"}},
 		},
 	}
@@ -202,4 +177,16 @@ func (s *protoJsonSerializer) Deserialize(c v4.Context, i interface{}) error {
 		return v4.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Syntax error: offset=%v, error=%v", se.Offset, se.Error())).SetInternal(err)
 	}
 	return err
+}
+
+var DefaultErrorHandler = func(err error, c v4.Context) {
+	c.JSON(http.StatusOK, struct {
+		Error int      `json:"error"`
+		Msg   string   `json:"msg"`
+		Data  struct{} `json:"data"`
+	}{
+		Error: http.StatusInternalServerError,
+		Msg:   err.Error(),
+		Data:  struct{}{},
+	})
 }
