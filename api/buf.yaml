@@ -1,0 +1,21 @@
+version: v1
+
+deps:
+  - buf.build/googleapis/googleapis
+  - buf.build/srikrsna/protoc-gen-gotag
+
+lint:
+  ignore:
+    - vendor
+  use:
+    - DEFAULT
+    - COMMENTS
+    - UNARY_RPC
+    - PACKAGE_NO_IMPORT_CYCLE
+
+breaking:
+  use:
+    - FILE
+
+  except:
+    - RPC_NO_DELETE
