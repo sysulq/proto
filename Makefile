@@ -4,6 +4,7 @@
 init:
 	go install github.com/bufbuild/buf/cmd/buf@latest
 	go install github.com/srikrsna/protoc-gen-gotag@latest
+	go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2@latest
 	go install ./cmd/protoc-gen-go-echo
 
 # update buf mod

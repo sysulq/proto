@@ -17,4 +17,5 @@ plugins:
   - name: go-echo
     out: gen/api/go
     opt: paths=source_relative
-
+  - name: openapiv2
+    out: gen/api/go

@@ -1,0 +1,161 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "helloworld/v1/helloworld.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "GreeterService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/helloworld.Greeter/SayHello": {
+      "post": {
+        "summary": "Sends a greeting",
+        "operationId": "GreeterService_SayHello",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1SayHelloResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "The request message containing the user's name.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1SayHelloRequest"
+            }
+          }
+        ],
+        "tags": [
+          "GreeterService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1SayHelloRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name ..."
+        }
+      },
+      "description": "The request message containing the user's name."
+    },
+    "v1SayHelloResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer",
+          "format": "int64",
+          "title": "error"
+        },
+        "msg": {
+          "type": "string",
+          "title": "msg"
+        },
+        "data": {
+          "$ref": "#/definitions/v1SayHelloResponseData",
+          "description": "data ..."
+        }
+      },
+      "title": "The response message containing the greetings"
+    },
+    "v1SayHelloResponseData": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "name of the user"
+        },
+        "ageNumber": {
+          "type": "string",
+          "format": "uint64",
+          "description": "age_number is the age number."
+        }
+      },
+      "description": "Data is the data to be sent."
+    },
+    "v1SayHiResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "integer",
+          "format": "int64",
+          "title": "error"
+        },
+        "msg": {
+          "type": "string",
+          "title": "msg"
+        },
+        "data": {
+          "$ref": "#/definitions/v1SayHiResponseData",
+          "description": "data ..."
+        }
+      },
+      "title": "The response message containing the greetings"
+    },
+    "v1SayHiResponseData": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "name of the user"
+        },
+        "ageNumber": {
+          "type": "string",
+          "format": "uint64",
+          "description": "age_number is the age number."
+        }
+      },
+      "description": "Data is the data to be sent."
+    }
+  }
+}
