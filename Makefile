@@ -25,8 +25,13 @@ generate:
 lint:
 	buf lint
 
+# breaking
 breaking:
 	buf breaking --against https://github.com/douyu/proto/.git#branch=main,ref=HEAD~1,subdir=api
+
+# test
+test:
+	go test -v ./...
 
 .PHONY: all
 

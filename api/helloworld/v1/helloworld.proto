@@ -26,7 +26,7 @@ service GreeterService {
 // The request message containing the user's name.
 message SayHelloRequest {
   // name ...
-  string name = 1 [(tagger.tags) = "form:\"name\""] ;;
+  string name = 1 [(tagger.tags) = "form:\"name\""] ;
 }
 
 // The response message containing the greetings
@@ -49,7 +49,7 @@ message SayHelloResponse {
 // The request message containing the user's name.
 message SayHiRequest {
   // name ...
-  string name = 1 [(tagger.tags) = "form:\"name\""] ;;
+  string name = 1 [(tagger.tags) = "form:\"name\""] ;
 }
 
 // The response message containing the greetings
