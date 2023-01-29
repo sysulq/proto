@@ -1,7 +1,6 @@
 package main
 
 import (
-	"net/http"
 	"regexp"
 	"strings"
 
@@ -78,48 +77,8 @@ func genMethod(m *protogen.Method) []*method {
 	}
 
 	// 不存在走默认流程
-	methods = append(methods, defaultMethod(m))
+	// methods = append(methods, defaultMethod(m))
 	return methods
-}
-
-// defaultMethodPath 根据函数名生成 http 路由
-// 例如: GetBlogArticles ==> get: /blog/articles
-// 如果方法名首个单词不是 http method 映射，那么默认返回 POST
-func defaultMethod(m *protogen.Method) *method {
-	names := strings.Split(toSnakeCase(m.GoName), "_")
-	var (
-		paths      []string
-		httpMethod string
-		path       string
-	)
-
-	switch strings.ToUpper(names[0]) {
-	case http.MethodGet, "FIND", "QUERY", "LIST", "SEARCH":
-		httpMethod = http.MethodGet
-	case http.MethodPost, "CREATE":
-		httpMethod = http.MethodPost
-	case http.MethodPut, "UPDATE":
-		httpMethod = http.MethodPut
-	case http.MethodPatch:
-		httpMethod = http.MethodPatch
-	case http.MethodDelete:
-		httpMethod = http.MethodDelete
-	default:
-		httpMethod = "POST"
-		paths = names
-	}
-
-	if len(paths) > 0 {
-		path = strings.Join(paths, "/")
-	}
-
-	if len(names) > 1 {
-		path = strings.Join(names[1:], "/")
-	}
-
-	md := buildMethodDesc(m, httpMethod, path)
-	md.Body = "*"
-	return md
 }
 
 func buildHTTPRule(m *protogen.Method, rule *annotations.HttpRule) *method {
