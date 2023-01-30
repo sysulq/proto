@@ -51,7 +51,7 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 				},
 			},
 			wantErr:    false,
-			wantRes:    "{\"error\":0, \"msg\":\"\", \"data\":{\"name\":\"bob\", \"ageNumber\":\"0\", \"sex\":0}}",
+			wantRes:    "{\"error\":0,\"msg\":\"\",\"data\":{\"name\":\"bob\",\"ageNumber\":\"0\",\"sex\":0}}",
 			wantHeader: http.Header{"Content-Type": []string{"application/json; charset=UTF-8"}},
 		},
 		{
@@ -74,7 +74,7 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 				},
 			},
 			wantErr:    false,
-			wantRes:    "{\"error\":500,\"msg\":\"rpc error: code = DataLoss desc = error foo\",\"data\":{}}\n",
+			wantRes:    "{\"error\":500,\"msg\":\"rpc error: code = DataLoss desc = error foo\",\"data\":{}}",
 			wantHeader: http.Header{"Content-Type": []string{"application/json; charset=UTF-8"}},
 		},
 		{
@@ -97,7 +97,7 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 				},
 			},
 			wantErr:    false,
-			wantRes:    "{\"error\":500,\"msg\":\"code=400, message=Syntax error: offset=2, error=invalid character 'a' in literal null (expecting 'u'), internal=invalid character 'a' in literal null (expecting 'u')\",\"data\":{}}\n",
+			wantRes:    "{\"error\":500,\"msg\":\"code=400, message=Syntax error: offset=2, error=invalid character 'a' in literal null (expecting 'u'), internal=invalid character 'a' in literal null (expecting 'u')\",\"data\":{}}",
 			wantHeader: http.Header{"Content-Type": []string{"application/json; charset=UTF-8"}},
 		},
 		{
@@ -120,7 +120,7 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 				},
 			},
 			wantErr:    false,
-			wantRes:    "{\"error\":500,\"msg\":\"code=404, message=Not Found\",\"data\":{}}\n",
+			wantRes:    "{\"error\":500,\"msg\":\"code=404, message=Not Found\",\"data\":{}}",
 			wantHeader: http.Header{"Content-Type": []string{"application/json; charset=UTF-8"}},
 		},
 		{
@@ -142,7 +142,7 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 				},
 			},
 			wantErr: false,
-			wantRes: "{\"error\":0,\"msg\":\"\",\"data\":{\"name\":\"bob\",\"ageNumber\":0,\"sex\":0}}\n",
+			wantRes: "{\"error\":0,\"msg\":\"\",\"data\":{\"name\":\"bob\",\"ageNumber\":0,\"sex\":0}}",
 		},
 	}
 
@@ -160,7 +160,7 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 			if err != nil {
 				body.WriteString(res.Body.String())
 			}
-			assert.Equal(t, tt.wantRes, res.Body.String())
+			assert.Equal(t, tt.wantRes, body.String())
 
 			if len(tt.wantHeader) > 0 {
 				assert.Equal(t, tt.wantHeader, res.Header())
