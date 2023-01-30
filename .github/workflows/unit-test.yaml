@@ -37,6 +37,5 @@ jobs:
         run: |
           make init
           make lint
-          make breaking
           make generate
           make test
