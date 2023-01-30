@@ -27,3 +27,4 @@ plugins:
     opt: 
       - disable_default_errors=true
       - enums_as_ints=true
+      - omit_enum_default_value=true
