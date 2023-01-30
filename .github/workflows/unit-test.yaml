@@ -34,7 +34,7 @@ jobs:
         id: go
       
       - name: do unit test
-        run:
+        run: |
           make init
           make lint
           make breaking
