@@ -36,7 +36,7 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 				server: new(FooServer),
 				createRouter: func() *v4.Echo {
 					echo := v4.New()
-					echo.HTTPErrorHandler = DefaultErrorHandler
+					echo.HTTPErrorHandler = defaultErrorHandler
 					echo.JSONSerializer = new(protoJsonSerializer)
 					return echo
 				},
@@ -60,7 +60,7 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 				server: new(FooServer),
 				createRouter: func() *v4.Echo {
 					echo := v4.New()
-					echo.HTTPErrorHandler = DefaultErrorHandler
+					echo.HTTPErrorHandler = defaultErrorHandler
 					return echo
 				},
 			},
@@ -83,7 +83,7 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 				server: new(FooServer),
 				createRouter: func() *v4.Echo {
 					echo := v4.New()
-					echo.HTTPErrorHandler = DefaultErrorHandler
+					echo.HTTPErrorHandler = defaultErrorHandler
 					return echo
 				},
 			},
@@ -106,7 +106,7 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 				server: new(FooServer),
 				createRouter: func() *v4.Echo {
 					echo := v4.New()
-					echo.HTTPErrorHandler = DefaultErrorHandler
+					echo.HTTPErrorHandler = defaultErrorHandler
 					return echo
 				},
 			},
@@ -129,7 +129,7 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 				server: new(FooServer),
 				createRouter: func() *v4.Echo {
 					echo := v4.New()
-					echo.HTTPErrorHandler = DefaultErrorHandler
+					echo.HTTPErrorHandler = defaultErrorHandler
 					return echo
 				},
 			},
@@ -142,7 +142,7 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 				},
 			},
 			wantErr: false,
-			wantRes: "{\"data\":{\"name\":\"bob\"}}\n",
+			wantRes: "{\"error\":0,\"msg\":\"\",\"data\":{\"name\":\"bob\",\"ageNumber\":0}}\n",
 		},
 	}
 
@@ -202,7 +202,7 @@ func (s *protoJsonSerializer) Deserialize(c v4.Context, i interface{}) error {
 	return err
 }
 
-var DefaultErrorHandler = func(err error, c v4.Context) {
+var defaultErrorHandler = func(err error, c v4.Context) {
 	c.JSON(http.StatusOK, struct {
 		Error int      `json:"error"`
 		Msg   string   `json:"msg"`

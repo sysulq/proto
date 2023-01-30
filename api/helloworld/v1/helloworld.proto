@@ -13,19 +13,29 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
   info: {
-    title: "helloworld demo api definition";
-    version: "1.0";
+    title: "helloworld demo api definition"
+    version: "1.0"
     contact: {
-      name: "douyu/proto project";
-      url: "https://github.com/douyu/proto";
-      email: "hnlq.sysu@gmail.com";
+      name: "douyu"
+      url: "https://github.com/douyu/proto"
     };
   };
+  tags: [
+    {
+      name: "Project 001"
+      description: "This is how we do it."
+      external_docs: {
+        description: "Find out more"
+        url: "https://github.com/douyu/proto"
+      }
+    }
+  ];
+  consumes: "application/x-www-form-urlencoded"
 };
 
 // The greeting service definition.
 service GreeterService {
-  // Sends a greeting
+  // Sends a hello greeting
   rpc SayHello (SayHelloRequest) returns (SayHelloResponse) {
     option (google.api.http) = {
       post: "/v1/helloworld.Greeter/SayHello"
@@ -34,15 +44,18 @@ service GreeterService {
         get: "/v1/helloworld.Greeter/SayHello/{name}"
       }
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: ["Project 001"]
+    };
   }
-  // Sends a greeting
+  // Sends a hi greeting
   rpc SayHi (SayHiRequest) returns (SayHiResponse) {}
 }
 
 // The request message containing the user's name.
 message SayHelloRequest {
   // name ...
-  string name = 1 [(tagger.tags) = "form:\"name\" param:\"name\""] ;
+  string name = 1 [(tagger.tags) = "form:\"name\" param:\"name\""];
 }
 
 // The response message containing the greetings
@@ -50,7 +63,7 @@ message SayHelloResponse {
   // Data is the data to be sent.
   message Data {
     // name of the user
-    string name = 1;
+    string name = 1 [(tagger.tags) = "json:\"name\""];
     // age_number is the age number.
     uint64 age_number = 2;
   }

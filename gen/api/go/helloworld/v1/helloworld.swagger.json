@@ -4,18 +4,25 @@
     "title": "helloworld demo api definition",
     "version": "1.0",
     "contact": {
-      "name": "douyu/proto project",
-      "url": "https://github.com/douyu/proto",
-      "email": "hnlq.sysu@gmail.com"
+      "name": "douyu",
+      "url": "https://github.com/douyu/proto"
     }
   },
   "tags": [
     {
       "name": "GreeterService"
+    },
+    {
+      "name": "Project 001",
+      "description": "This is how we do it.",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://github.com/douyu/proto"
+      }
     }
   ],
   "consumes": [
-    "application/json"
+    "application/x-www-form-urlencoded"
   ],
   "produces": [
     "application/json"
@@ -23,19 +30,13 @@
   "paths": {
     "/v1/helloworld.Greeter/SayHello": {
       "post": {
-        "summary": "Sends a greeting",
+        "summary": "Sends a hello greeting",
         "operationId": "GreeterService_SayHello",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/v1SayHelloResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -51,25 +52,19 @@
           }
         ],
         "tags": [
-          "GreeterService"
+          "Project 001"
         ]
       }
     },
     "/v1/helloworld.Greeter/SayHello/{name}": {
       "get": {
-        "summary": "Sends a greeting",
+        "summary": "Sends a hello greeting",
         "operationId": "GreeterService_SayHello2",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/v1SayHelloResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
             }
           }
         },
@@ -83,39 +78,12 @@
           }
         ],
         "tags": [
-          "GreeterService"
+          "Project 001"
         ]
       }
     }
   },
   "definitions": {
-    "protobufAny": {
-      "type": "object",
-      "properties": {
-        "@type": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": {}
-    },
-    "rpcStatus": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "message": {
-          "type": "string"
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/protobufAny"
-          }
-        }
-      }
-    },
     "v1SayHelloRequest": {
       "type": "object",
       "properties": {

@@ -5,3 +5,4 @@ plugins:
     out: ../gen/api/go
     opt:
       - paths=source_relative
+      - auto=json-as-camel

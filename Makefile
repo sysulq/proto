@@ -7,6 +7,7 @@ init:
 	go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2
 	go install google.golang.org/protobuf/cmd/protoc-gen-go
 	go install google.golang.org/grpc/cmd/protoc-gen-go-grpc
+	go install github.com/go-swagger/go-swagger/cmd/swagger
 	go install ./cmd/protoc-gen-go-echo
 
 # update buf mod
@@ -32,6 +33,10 @@ breaking:
 # test
 test:
 	go test -v ./...
+
+# serve openapi docs
+serve:
+	swagger serve gen/api/go/helloworld/v1/helloworld.swagger.json
 
 .PHONY: all
 
