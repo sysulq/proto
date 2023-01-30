@@ -26,3 +26,4 @@ plugins:
     out: gen/api/go
     opt: 
       - disable_default_errors=true
+      - enums_as_ints=true

@@ -46,6 +46,14 @@ service GreeterService {
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Project 001"]
+      parameters: {
+        headers: {
+          name: "token";
+          description: "Token Header";
+          type: STRING,
+          required: true;
+        }
+      }
     };
   }
   // Sends a hi greeting
@@ -66,6 +74,8 @@ message SayHelloResponse {
     string name = 1 [(tagger.tags) = "json:\"name\""];
     // age_number is the age number.
     uint64 age_number = 2;
+    // sex is the user's sex
+    Sex sex = 3;
   }
   // error
   uint32 error = 1;
@@ -96,4 +106,14 @@ message SayHiResponse {
   string msg = 2;
   // data ...
   Data data = 3;
+}
+
+// Sex
+enum Sex {
+  // SexUnknown ...
+  SexUnknown = 0;
+  // SexMale ...
+  SexMale = 1;
+  // SexFemale ...
+  SexFemale = 2;
 }

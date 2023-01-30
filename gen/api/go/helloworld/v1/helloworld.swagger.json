@@ -49,6 +49,13 @@
             "schema": {
               "$ref": "#/definitions/v1SayHelloRequest"
             }
+          },
+          {
+            "name": "token",
+            "description": "Token Header",
+            "in": "header",
+            "required": true,
+            "type": "string"
           }
         ],
         "tags": [
@@ -73,6 +80,13 @@
             "name": "name",
             "description": "name ...",
             "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "token",
+            "description": "Token Header",
+            "in": "header",
             "required": true,
             "type": "string"
           }
@@ -124,6 +138,10 @@
           "type": "string",
           "format": "uint64",
           "description": "age_number is the age number."
+        },
+        "sex": {
+          "$ref": "#/definitions/v1Sex",
+          "title": "sex is the user's sex"
         }
       },
       "description": "Data is the data to be sent."
@@ -161,6 +179,18 @@
         }
       },
       "description": "Data is the data to be sent."
+    },
+    "v1Sex": {
+      "type": "integer",
+      "format": "int32",
+      "enum": [
+        "0",
+        "1",
+        "2"
+      ],
+      "default": "0",
+      "description": "- 0: SexUnknown ...\n - 1: SexMale ...\n - 2: SexFemale ...",
+      "title": "Sex"
     }
   }
 }

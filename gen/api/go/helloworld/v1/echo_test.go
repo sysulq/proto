@@ -142,7 +142,7 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 				},
 			},
 			wantErr: false,
-			wantRes: "{\"error\":0,\"msg\":\"\",\"data\":{\"name\":\"bob\",\"ageNumber\":0}}\n",
+			wantRes: "{\"error\":0,\"msg\":\"\",\"data\":{\"name\":\"bob\",\"ageNumber\":0,\"sex\":0}}\n",
 		},
 	}
 
