@@ -36,7 +36,7 @@ type _GreeterService struct {
 func (s *_GreeterService) _handler_SayHello_0(ctx v4.Context) error {
 	var in SayHelloRequest
 	if err := ctx.Bind(&in); err != nil {
-		ctx.Error(v4.NewHTTPError(200, err))
+		ctx.Error(v4.NewHTTPError(http.StatusOK, err))
 		return nil
 	}
 	md := metadata.New(nil)
@@ -46,7 +46,7 @@ func (s *_GreeterService) _handler_SayHello_0(ctx v4.Context) error {
 	newCtx := metadata.NewIncomingContext(ctx.Request().Context(), md)
 	out, err := s.server.(GreeterServiceEchoServer).SayHello(newCtx, &in)
 	if err != nil {
-		ctx.Error(v4.NewHTTPError(200, err))
+		ctx.Error(v4.NewHTTPError(http.StatusOK, err))
 		return nil
 	}
 
