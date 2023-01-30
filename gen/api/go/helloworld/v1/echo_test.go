@@ -31,7 +31,7 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 		wantHeader http.Header
 	}{
 		{
-			name: "case 1",
+			name: "case 1: post with form",
 			fields: fields{
 				server: new(FooServer),
 				createRouter: func() *v4.Echo {
@@ -55,7 +55,7 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 			wantHeader: http.Header{"Content-Type": []string{"application/json; charset=UTF-8"}},
 		},
 		{
-			name: "case 2",
+			name: "case 2: post with json",
 			fields: fields{
 				server: new(FooServer),
 				createRouter: func() *v4.Echo {
@@ -74,11 +74,11 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 				},
 			},
 			wantErr:    false,
-			wantRes:    "{\"error\":500,\"msg\":\"code=200, message=rpc error: code = DataLoss desc = error foo\",\"data\":{}}\n",
+			wantRes:    "{\"error\":500,\"msg\":\"rpc error: code = DataLoss desc = error foo\",\"data\":{}}\n",
 			wantHeader: http.Header{"Content-Type": []string{"application/json; charset=UTF-8"}},
 		},
 		{
-			name: "case 3",
+			name: "case 3: invalid content type",
 			fields: fields{
 				server: new(FooServer),
 				createRouter: func() *v4.Echo {
@@ -97,11 +97,11 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 				},
 			},
 			wantErr:    false,
-			wantRes:    "{\"error\":500,\"msg\":\"code=200, message=code=400, message=Syntax error: offset=2, error=invalid character 'a' in literal null (expecting 'u'), internal=invalid character 'a' in literal null (expecting 'u')\",\"data\":{}}\n",
+			wantRes:    "{\"error\":500,\"msg\":\"code=400, message=Syntax error: offset=2, error=invalid character 'a' in literal null (expecting 'u'), internal=invalid character 'a' in literal null (expecting 'u')\",\"data\":{}}\n",
 			wantHeader: http.Header{"Content-Type": []string{"application/json; charset=UTF-8"}},
 		},
 		{
-			name: "case 4",
+			name: "case 4: not found",
 			fields: fields{
 				server: new(FooServer),
 				createRouter: func() *v4.Echo {
@@ -123,6 +123,27 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 			wantRes:    "{\"error\":500,\"msg\":\"code=404, message=Not Found\",\"data\":{}}\n",
 			wantHeader: http.Header{"Content-Type": []string{"application/json; charset=UTF-8"}},
 		},
+		{
+			name: "case 5: bind param for GET",
+			fields: fields{
+				server: new(FooServer),
+				createRouter: func() *v4.Echo {
+					echo := v4.New()
+					echo.HTTPErrorHandler = DefaultErrorHandler
+					return echo
+				},
+			},
+			args: args{
+				createReq: func() *http.Request {
+					req := httptest.NewRequest(
+						"GET", "http://localhost/v1/helloworld.Greeter/SayHello/bob",
+						nil)
+					return req
+				},
+			},
+			wantErr: false,
+			wantRes: "{\"data\":{\"name\":\"bob\"}}\n",
+		},
 	}
 
 	for _, tt := range tests {
@@ -141,7 +162,9 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 			}
 			assert.Equal(t, tt.wantRes, res.Body.String())
 
-			assert.Equal(t, tt.wantHeader, res.Header())
+			if len(tt.wantHeader) > 0 {
+				assert.Equal(t, tt.wantHeader, res.Header())
+			}
 		})
 	}
 }

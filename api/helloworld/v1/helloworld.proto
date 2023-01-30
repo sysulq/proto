@@ -9,6 +9,19 @@ package helloworld.v1;
 
 import "google/api/annotations.proto";
 import "tagger/tagger.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {
+    title: "helloworld demo api definition";
+    version: "1.0";
+    contact: {
+      name: "douyu/proto project";
+      url: "https://github.com/douyu/proto";
+      email: "hnlq.sysu@gmail.com";
+    };
+  };
+};
 
 // The greeting service definition.
 service GreeterService {
@@ -17,6 +30,9 @@ service GreeterService {
     option (google.api.http) = {
       post: "/v1/helloworld.Greeter/SayHello"
       body: "*"
+      additional_bindings {
+        get: "/v1/helloworld.Greeter/SayHello/{name}"
+      }
     };
   }
   // Sends a greeting
@@ -26,7 +42,7 @@ service GreeterService {
 // The request message containing the user's name.
 message SayHelloRequest {
   // name ...
-  string name = 1 [(tagger.tags) = "form:\"name\""] ;
+  string name = 1 [(tagger.tags) = "form:\"name\" param:\"name\""] ;
 }
 
 // The response message containing the greetings

@@ -1,8 +1,13 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "helloworld/v1/helloworld.proto",
-    "version": "version not set"
+    "title": "helloworld demo api definition",
+    "version": "1.0",
+    "contact": {
+      "name": "douyu/proto project",
+      "url": "https://github.com/douyu/proto",
+      "email": "hnlq.sysu@gmail.com"
+    }
   },
   "tags": [
     {
@@ -43,6 +48,38 @@
             "schema": {
               "$ref": "#/definitions/v1SayHelloRequest"
             }
+          }
+        ],
+        "tags": [
+          "GreeterService"
+        ]
+      }
+    },
+    "/v1/helloworld.Greeter/SayHello/{name}": {
+      "get": {
+        "summary": "Sends a greeting",
+        "operationId": "GreeterService_SayHello2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1SayHelloResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "name",
+            "description": "name ...",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "tags": [
