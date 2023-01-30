@@ -188,7 +188,7 @@
         "2"
       ],
       "default": "0",
-      "description": "- 0: SexUnknown ...\n - 1: SexMale ...\n - 2: SexFemale ...",
+      "description": "- 0: SEX_UNSPECIFIED ...\n - 1: SEX_MALE ...\n - 2: SEX_FEMALE ...",
       "title": "Sex"
     }
   }
