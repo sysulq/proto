@@ -51,7 +51,7 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 				},
 			},
 			wantErr:    false,
-			wantRes:    "{\"data\":{\"name\":\"bob\"}}",
+			wantRes:    "{\"error\":0, \"msg\":\"\", \"data\":{\"name\":\"bob\", \"ageNumber\":\"0\", \"sex\":0}}",
 			wantHeader: http.Header{"Content-Type": []string{"application/json; charset=UTF-8"}},
 		},
 		{
@@ -180,7 +180,10 @@ func (s *protoJsonSerializer) Serialize(c v4.Context, i interface{}, indent stri
 	)
 	switch i.(type) {
 	case proto.Message:
-		data, err = protojson.Marshal(i.(proto.Message))
+		data, err = protojson.MarshalOptions{
+			EmitUnpopulated: true,
+			UseEnumNumbers:  true,
+		}.Marshal(i.(proto.Message))
 	default:
 		data, err = json.Marshal(i)
 	}
