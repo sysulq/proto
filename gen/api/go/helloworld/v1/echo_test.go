@@ -51,7 +51,7 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 				},
 			},
 			wantErr:    false,
-			wantRes:    "{\"error\":0,\"msg\":\"\",\"data\":{\"name\":\"bob\",\"ageNumber\":\"0\",\"sex\":0}}",
+			wantRes:    `{"error":0,"msg":"","data":{"name":"bob","ageNumber":"0","sex":0,"metadata":{}}}`,
 			wantHeader: http.Header{"Content-Type": []string{"application/json; charset=UTF-8"}},
 		},
 		{
@@ -142,7 +142,7 @@ func TestGreeterService_SayHello_0(t *testing.T) {
 				},
 			},
 			wantErr: false,
-			wantRes: "{\"error\":0,\"msg\":\"\",\"data\":{\"name\":\"bob\",\"ageNumber\":0,\"sex\":0}}",
+			wantRes: `{"error":0,"msg":"","data":{"name":"bob","ageNumber":0,"sex":0,"metadata":null}}`,
 		},
 	}
 

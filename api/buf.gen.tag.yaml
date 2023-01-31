@@ -2,7 +2,7 @@ version: v1
 
 plugins:
   - name: gotag
-    out: ../gen/api/go
+    out: ../gen/go/api
     opt:
       - paths=source_relative
       - auto=json-as-camel

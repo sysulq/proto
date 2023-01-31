@@ -2,7 +2,7 @@ version: v1
 
 plugins:
   - name: go
-    out: gen/api/go
+    out: gen/go/api
     opt:
       - paths=source_relative
 
@@ -12,18 +12,18 @@ plugins:
       - paths=source_relative
 
   - name: go-grpc
-    out: gen/api/go
+    out: gen/go/api
     opt:
       - require_unimplemented_servers=false
       - paths=source_relative
 
   - name: go-echo
-    out: gen/api/go
+    out: gen/go/api
     opt: 
       - paths=source_relative
 
   - name: openapiv2
-    out: gen/api/go
+    out: gen/go/api
     opt: 
       - disable_default_errors=true
       - enums_as_ints=true

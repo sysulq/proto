@@ -36,7 +36,7 @@ test:
 
 # serve openapi docs
 serve:
-	swagger serve gen/api/go/helloworld/v1/helloworld.swagger.json
+	swagger serve gen/go/api/helloworld/v1/helloworld.swagger.json
 
 .PHONY: all
 

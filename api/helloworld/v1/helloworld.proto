@@ -3,7 +3,7 @@ syntax = "proto3";
 option java_multiple_files = true;
 option java_package = "com.douyu.helloworld.v1";
 option java_outer_classname = "HelloWorldProtoV1";
-option go_package = "github.com/douyu/proto/gen/api/go/helloworld/v1;helloworldv1";
+option go_package = "github.com/douyu/proto/gen/go/api/helloworld/v1;helloworldv1";
 
 package helloworld.v1;
 
@@ -76,6 +76,8 @@ message SayHelloResponse {
     uint64 age_number = 2;
     // sex is the user's sex
     Sex sex = 3;
+    // metadata is the user's metadata
+    map<string,string> metadata = 4;
   }
   // error
   uint32 error = 1;
