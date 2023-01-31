@@ -77,8 +77,19 @@ func genMethod(m *protogen.Method) []*method {
 	}
 
 	// 不存在走默认流程
-	// methods = append(methods, defaultMethod(m))
+	methods = append(methods, defaultMethod(m))
 	return methods
+}
+
+func defaultMethod(m *protogen.Method) *method {
+	return &method{
+		Name:    m.GoName,
+		Num:     methodSets[m.GoName],
+		Request: m.Input.GoIdent.GoName,
+		Reply:   m.Output.GoIdent.GoName,
+		Path:    "/" + string(m.Parent.Desc.FullName()) + "/" + m.GoName,
+		Method:  "POST",
+	}
 }
 
 func buildHTTPRule(m *protogen.Method, rule *annotations.HttpRule) *method {

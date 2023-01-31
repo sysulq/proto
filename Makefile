@@ -32,7 +32,11 @@ breaking:
 
 # test
 test:
-	go test -v ./...
+	go test -v -cover ./...
+
+# validate openapi docs
+validate:
+	swagger validate gen/go/api/helloworld/v1/helloworld.swagger.json
 
 # serve openapi docs
 serve:

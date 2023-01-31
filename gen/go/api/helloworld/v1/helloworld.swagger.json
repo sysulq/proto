@@ -28,6 +28,34 @@
     "application/json"
   ],
   "paths": {
+    "/helloworld.v1.GreeterService/SayHi": {
+      "post": {
+        "summary": "Sends a hi greeting",
+        "operationId": "GreeterService_SayHi",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1SayHiResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "The request message containing the user's name.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1SayHiRequest"
+            }
+          }
+        ],
+        "tags": [
+          "GreeterService"
+        ]
+      }
+    },
     "/v1/helloworld.Greeter/SayHello": {
       "post": {
         "summary": "Sends a hello greeting",
@@ -153,6 +181,16 @@
       },
       "description": "Data is the data to be sent."
     },
+    "v1SayHiRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name ..."
+        }
+      },
+      "description": "The request message containing the user's name."
+    },
     "v1SayHiResponse": {
       "type": "object",
       "properties": {
@@ -188,14 +226,14 @@
       "description": "Data is the data to be sent."
     },
     "v1Sex": {
-      "type": "integer",
-      "format": "int32",
+      "type": "string",
       "enum": [
-        "1",
-        "2"
+        "SEX_UNSPECIFIED",
+        "SEX_MALE",
+        "SEX_FEMALE"
       ],
-      "default": "0",
-      "description": "- 0: SEX_UNSPECIFIED ...\n - 1: SEX_MALE ...\n - 2: SEX_FEMALE ...",
+      "default": "SEX_UNSPECIFIED",
+      "description": "- SEX_UNSPECIFIED: SEX_UNSPECIFIED ...\n - SEX_MALE: SEX_MALE ...\n - SEX_FEMALE: SEX_FEMALE ...",
       "title": "Sex"
     }
   }
