@@ -10,7 +10,7 @@
   },
   "tags": [
     {
-      "name": "GreeterService"
+      "name": "helloworld.v1.GreeterService"
     },
     {
       "name": "Project 001",
@@ -52,7 +52,7 @@
           }
         ],
         "tags": [
-          "GreeterService"
+          "helloworld.v1.GreeterService"
         ]
       }
     },
