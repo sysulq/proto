@@ -20,8 +20,11 @@ var _ = metadata.New
 var _ = v4.DefaultBinder{}
 
 type GreeterServiceEchoServer interface {
+
+	// Sends a hello greeting
 	SayHello(context.Context, *SayHelloRequest) (*SayHelloResponse, error)
 
+	// Sends a hi greeting
 	SayHi(context.Context, *SayHiRequest) (*SayHiResponse, error)
 }
 
@@ -38,6 +41,7 @@ type _GreeterService struct {
 	router *v4.Echo
 }
 
+// Sends a hello greeting
 func (s *_GreeterService) _handler_SayHello_0(ctx v4.Context) error {
 	var in SayHelloRequest
 	if err := ctx.Bind(&in); err != nil {
@@ -58,6 +62,7 @@ func (s *_GreeterService) _handler_SayHello_0(ctx v4.Context) error {
 	return ctx.JSON(http.StatusOK, out)
 }
 
+// Sends a hello greeting
 func (s *_GreeterService) _handler_SayHello_1(ctx v4.Context) error {
 	var in SayHelloRequest
 	if err := ctx.Bind(&in); err != nil {
@@ -78,6 +83,7 @@ func (s *_GreeterService) _handler_SayHello_1(ctx v4.Context) error {
 	return ctx.JSON(http.StatusOK, out)
 }
 
+// Sends a hi greeting
 func (s *_GreeterService) _handler_SayHi_0(ctx v4.Context) error {
 	var in SayHiRequest
 	if err := ctx.Bind(&in); err != nil {
@@ -100,10 +106,13 @@ func (s *_GreeterService) _handler_SayHi_0(ctx v4.Context) error {
 
 func (s *_GreeterService) registerService() {
 
+	// Sends a hello greeting
 	s.router.Add("GET", "/v1/helloworld.Greeter/SayHello/:name", s._handler_SayHello_0)
 
+	// Sends a hello greeting
 	s.router.Add("POST", "/v1/helloworld.Greeter/SayHello", s._handler_SayHello_1)
 
+	// Sends a hi greeting
 	s.router.Add("POST", "/helloworld.v1.GreeterService/SayHi", s._handler_SayHi_0)
 
 }

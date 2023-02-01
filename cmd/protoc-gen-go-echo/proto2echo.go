@@ -95,6 +95,7 @@ func defaultMethod(m *protogen.Method) *method {
 		Reply:   m.Output.GoIdent.GoName,
 		Path:    "/" + string(m.Parent.Desc.FullName()) + "/" + m.GoName,
 		Method:  "POST",
+		Comment: m.Comments.Leading.String(),
 	}
 }
 
@@ -136,6 +137,7 @@ func buildMethodDesc(m *protogen.Method, httpMethod, path string) *method {
 		Reply:   m.Output.GoIdent.GoName,
 		Path:    path,
 		Method:  httpMethod,
+		Comment: m.Comments.Leading.String(),
 	}
 	md.initPathParams()
 	return md
