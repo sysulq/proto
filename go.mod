@@ -15,6 +15,8 @@ require (
 	google.golang.org/protobuf v1.28.2-0.20230222093303-bc1253ad3743
 )
 
+replace github.com/grpc-ecosystem/grpc-gateway/v2 v2.15.0 => github.com/hnlq715/grpc-gateway/v2 v2.0.0-20230201071526-9672605c620a
+
 require (
 	github.com/Azure/go-ansiterm v0.0.0-20230124172434-306776ec8161 // indirect
 	github.com/Masterminds/goutils v1.1.1 // indirect
